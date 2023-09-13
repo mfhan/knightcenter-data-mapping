@@ -19,6 +19,7 @@ downloads:
 freshdata:
 	node imf_to_csv.js
 
+#this will create temporary error if the elements already exist
 all: directories downloads freshdata
 
 clean:
