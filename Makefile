@@ -17,6 +17,7 @@ downloads:
 
 
 freshdata:
+#this creates the csv called 'inflation'
 	node imf_to_csv.js
 
 all: directories downloads freshdata
@@ -54,9 +55,12 @@ droughtmap:
 	-o format=svg ./data/droughtmap.svg
 
 filecheck:
+#I fetch the existing inflation data already uploaded on aws: 
 		curl "https://s3.amazonaws.com/media.johnkeefe.net/class-modules/inflation.csv" -o tmp/previous.csv
-
+#cmp is to compare two files byte by byte, the old version vs the new one 
 		cmp --silent ./tmp/previous.csv ./data/inflation.csv || \
+		
+#if the content is different, it posts through the slack webhook
 		curl -X POST -H 'Content-type: application/json' \
 		--insecure \
 		--data '{"text":"The file you asked me to watch has changed!"}' $$SLACK_WEBHOOK
