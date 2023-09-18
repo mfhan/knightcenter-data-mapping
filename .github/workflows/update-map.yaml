@@ -1,6 +1,6 @@
 on:
   workflow_dispatch:
-  #schedule:
+  schedule:
    - cron: '15 12 1 * *'    # <-- Set your cron here (UTC), for syntax see https://crontab.guru/
 
 jobs:
